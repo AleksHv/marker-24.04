@@ -109,3 +109,65 @@ const employees = [
 
 const empTable = new EmpTable(employees)
 document.body.innerHTML = empTable.getHtml()
+
+
+// 4 задача
+
+
+// Предположим, что класс EmpTable выглядит следующим образом:
+class EmpTableTwo {
+    constructor(data) {
+        this.data = data;
+    }
+
+    getHtml2() {
+        let html = '<table>';
+        html += '<tr><th>Name</th><th>Position</th></tr>';
+        this.data.forEach(emp => {
+            html += `<tr><td>${emp.name}</td><td>${emp.position}</td></tr>`;
+        });
+        html += '</table>';
+        return html;
+    }
+}
+
+// Теперь создадим класс StyledEmpTable, который наследуется от EmpTable
+class StyledEmpTableTwo extends EmpTableTwo {
+    getStyles2() {
+        return `
+            <style>
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+                th, td {
+                    border: 1px solid #ddd;
+                    padding: 8px;
+                }
+                th {
+                    background-color: #f2f2f2;
+                    text-align: left;
+                }
+                tr:hover {
+                    background-color: #f5f5f5;
+                }
+            </style>
+        `;
+    }
+
+    getHtml2() {
+        // Получаем HTML из родительского класса
+        const parentHtml = super.getHtml2();
+        // Добавляем стили к HTML
+        return this.getStyles2() + parentHtml;
+    }
+}
+
+// Пример использования
+const employeesTwo = [
+    { name: 'John Doe', position: 'Developer' },
+    { name: 'Jane Smith', position: 'Designer' },
+];
+
+// const styledEmpTableTwo = new StyledEmpTableTwo(employeesTwo);
+// document.body.innerHTML = styledEmpTableTwo.getHtml2();
